@@ -17,6 +17,10 @@ DEFAULTS = {
     "player_name": "",          # in-game riot name (used by OCR self-detection)
     "tesseract_cmd": "",        # override config.TESSERACT_CMD if set
     "scout_region_override": None,  # optional dict {left,top,right,bottom} — pixels
+    "friends": [],              # list of friends' Riot names (e.g. ["Nate#NA1", ...])
+                                # When a friend is on the same carry as your top rec,
+                                # contest weighs 3x → recommender pivots harder so you
+                                # don't all force the same comp and contest each other.
 }
 
 
@@ -71,3 +75,22 @@ def is_first_run() -> bool:
     if not _USER_CONFIG_PATH.exists():
         return True
     return not player_name()
+
+
+def friends() -> list[str]:
+    """Return the configured friends list (lowercase for matching)."""
+    raw = load().get("friends") or []
+    if isinstance(raw, str):
+        raw = [raw]
+    return [f.strip().lower() for f in raw if isinstance(f, str) and f.strip()]
+
+
+def is_friend(name: str) -> bool:
+    """Case-insensitive substring match against the configured friend list."""
+    if not name:
+        return False
+    target = name.lower()
+    for f in friends():
+        if f and (f in target or target in f):
+            return True
+    return False

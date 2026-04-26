@@ -57,8 +57,12 @@ class GameState:
         # Win-streak / stickiness tracking
         self.hp_history: list[int] = []     # last N HP samples
         self.last_rec_comp_name: str | None = None
-        self.win_streak: int = 0            # combats won in a row (HP didn't drop)
-        self.loss_streak: int = 0           # combats lost in a row (HP dropped)
+        self.win_streak: int = 0
+        self.loss_streak: int = 0
+
+        # Player number → OCR'd name (set when scout capture detects name).
+        # Used to identify friends in the lobby for contest weighting.
+        self.player_names: dict[int, str] = {}
 
     def record_hp(self, new_hp: int) -> None:
         """Append HP sample, recompute streaks. Call from live_tick when HP changes."""
@@ -141,6 +145,13 @@ class GameState:
         return label
 
     def to_context(self) -> GameContext:
+        # Compute friend opponents from name → friend lookup
+        friend_opps: set[int] = set()
+        for pnum, name in self.player_names.items():
+            if pnum == 1:
+                continue
+            if user_config.is_friend(name):
+                friend_opps.add(pnum)
         return GameContext(
             your_units=list(self.your_units),
             your_items=list(self.your_items),
@@ -153,6 +164,7 @@ class GameState:
             is_winning=self.is_winning(),
             win_streak=self.win_streak,
             loss_streak=self.loss_streak,
+            friend_opponents=friend_opps,
         )
 
     def state_dict(self) -> dict:
@@ -278,6 +290,7 @@ def main():
             # OCR the player name from this capture (if Tesseract available + enabled).
             force_self = None
             ocr_note = ""
+            detected_name = ""
             if getattr(config, "OCR_ENABLED", False):
                 is_yours, detected_name = ocr.is_my_board(scout_img)
                 if detected_name:
@@ -287,13 +300,17 @@ def main():
                     else:
                         force_self = False
                         ocr_note = f"OCR: '{detected_name}' (not you)"
+                        if user_config.is_friend(detected_name):
+                            ocr_note += " · FRIEND (contest weighted ×3)"
 
             prev_opp_for_player = state.opponents.get(state.capture_cursor, [])
-            # When storing as YOUR board, use the stricter high-confidence list to
-            # avoid spurious sell suggestions for false-positive detections.
             committing_to_self = (force_self is True) or (force_self is None and state.capture_cursor == 1)
             units_for_storage = high_conf_names if committing_to_self else unit_names
+            cursor_before_store = state.capture_cursor
             label = state.store_capture(units_for_storage, force_self=force_self)
+            # Remember name → player number mapping for friend-contest weighting
+            if detected_name and not committing_to_self:
+                state.player_names[cursor_before_store] = detected_name
             recs = recommender.recommend(state.to_context())
 
             # Add diff line if this isn't the first scout of this player this round
@@ -378,7 +395,7 @@ def main():
     def _resolve_target_comp_name(ctx: GameContext) -> str | None:
         comps = db.all_comps()
         if len(ctx.opponents) >= 6:
-            picks = recommender._best_counter_pick(ctx.opponents, comps, your_units=ctx.your_units)
+            picks = recommender._best_counter_pick(ctx.opponents, comps, your_units=ctx.your_units, friend_opponents=ctx.friend_opponents)
             if picks:
                 return picks[0][0]["name"]
         if ctx.your_units:

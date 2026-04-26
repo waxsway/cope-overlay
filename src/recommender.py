@@ -298,6 +298,11 @@ class GameContext:
     win_streak: int = 0
     loss_streak: int = 0
 
+    # Friend-aware contest: opponent player numbers we know are friends.
+    # Contest from these counts 3x — pivots harder so friends don't all force
+    # the same comp and contest each other.
+    friend_opponents: set[int] = field(default_factory=set)
+
 
 def stage_phase(stage: str | None) -> str:
     """Categorize a stage string into a phase: early / mid / late / final."""
@@ -694,7 +699,7 @@ def recommend_shop(shop_unit_slugs: list[str | None], ctx: GameContext, target_c
     if not target_comp:
         # Use best counter pick if opponents scouted, else closest to your board
         if ctx.opponents:
-            picks = _best_counter_pick(ctx.opponents, comps, your_units=ctx.your_units)
+            picks = _best_counter_pick(ctx.opponents, comps, your_units=ctx.your_units, friend_opponents=ctx.friend_opponents)
             if picks:
                 target_comp = picks[0][0]
         elif ctx.your_units:
@@ -929,7 +934,8 @@ def _aggregate_field(opponents: dict[int, list[str]], comps: list[dict]) -> tupl
 
 
 def _best_counter_pick(opponents: dict[int, list[str]], comps: list[dict],
-                       your_units: list[str] | None = None) -> list[tuple[dict, float, dict]]:
+                       your_units: list[str] | None = None,
+                       friend_opponents: set[int] | None = None) -> list[tuple[dict, float, dict]]:
     """Score every comp by:
       + EXPLOIT score: my strengths × enemy weaknesses
       − VULNERABILITY score: my weaknesses × enemy strengths
@@ -948,6 +954,8 @@ def _best_counter_pick(opponents: dict[int, list[str]], comps: list[dict],
     enemy_strengths_count, enemy_weaknesses_count = _aggregate_field(opponents, comps)
     n_field = len(opponents)
     my_avg_cost = avg_cost_of(your_units) if your_units else 0.0
+    friend_opponents = friend_opponents or set()
+    FRIEND_CONTEST_WEIGHT = 3.0  # friends count 3x in contest math
 
     scored = []
     for cand in comps:
@@ -968,11 +976,16 @@ def _best_counter_pick(opponents: dict[int, list[str]], comps: list[dict],
                 if my_weak in my_weaknesses:
                     vulnerability += count
 
-        # Contest
-        contest = sum(
-            1 for _, units in opponents.items()
-            if cand_carries & {_slug(u) for u in units}
-        )
+        # Contest — friends count 3x to spread the friend group across comps
+        contest = 0.0
+        contest_friends = 0
+        for pnum, units in opponents.items():
+            if cand_carries & {_slug(u) for u in units}:
+                if pnum in friend_opponents:
+                    contest += FRIEND_CONTEST_WEIGHT
+                    contest_friends += 1
+                else:
+                    contest += 1
 
         tier_bonus = {"S": 1.5, "A": 0.7, "B": 0.0, "C": -0.7}.get(cand.get("tier") or "B", 0.0)
 
@@ -984,10 +997,14 @@ def _best_counter_pick(opponents: dict[int, list[str]], comps: list[dict],
                     dominance += 1.0
                     break
 
-        # Heavy contest penalty
+        # Heavy contest penalty (already weights friends 3x via contest count)
         contest_penalty = contest * 1.5
         if contest >= 2:
             contest_penalty += 2.0
+        if contest_friends > 0:
+            # Bonus penalty when a known friend is on this comp — spreads the
+            # friend group across different comps even if the field math is close
+            contest_penalty += 1.5 * contest_friends
 
         # Downgrade penalty: punish recommending a comp meaningfully cheaper than
         # what the user is already running. Skip when contest would force a pivot.
@@ -1010,6 +1027,7 @@ def _best_counter_pick(opponents: dict[int, list[str]], comps: list[dict],
             "exploit": exploit,
             "vulnerability": vulnerability,
             "contest": contest,
+            "contest_friends": contest_friends,
             "tier_bonus": tier_bonus,
             "dominance": dominance,
             "field_size": n_field,
@@ -1045,7 +1063,7 @@ def recommend(ctx: GameContext) -> list[Recommendation]:
             detail_lines=[f"Press F1 while looking at each opponent's board ({config.OPPONENT_COUNT} total)."],
         )]
 
-    picks = _best_counter_pick(ctx.opponents, comps, your_units=ctx.your_units)
+    picks = _best_counter_pick(ctx.opponents, comps, your_units=ctx.your_units, friend_opponents=ctx.friend_opponents)
     if not picks:
         return [Recommendation(
             headline=f"Scouted {scouted}/{config.OPPONENT_COUNT} — none identifiable yet",
