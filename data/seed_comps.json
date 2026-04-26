@@ -1,0 +1,336 @@
+{
+  "patch": "17.1b",
+  "set_number": 17,
+  "_note": "Set 17 (Space Gods) — current as of April 2026. Replace via `python -m src.scraper` once selectors fit a meta site, or hand-edit each patch.",
+  "comps": [
+    {
+      "name": "Stay Groovy",
+      "patch": "17.1b",
+      "tier": "S",
+      "avg_placement": 4.05,
+      "play_rate": 0.06,
+      "top4_rate": 0.58,
+      "win_rate": 0.13,
+      "target_level": 8,
+      "play_style": "fast8",
+      "notes": "Space Groove flex with Blitzcrank carry; wins vs squishy backlines, loses to true-damage Marauders.",
+      "units": [
+        {"name": "Blitzcrank", "star_target": 2, "is_carry": true},
+        {"name": "Nami", "star_target": 2, "is_carry": false},
+        {"name": "Nunu", "star_target": 2, "is_carry": false},
+        {"name": "Riven", "star_target": 2, "is_carry": false},
+        {"name": "Shen", "star_target": 2, "is_carry": false},
+        {"name": "Tahm Kench", "star_target": 2, "is_carry": false},
+        {"name": "Ornn", "star_target": 2, "is_carry": false},
+        {"name": "Gwen", "star_target": 2, "is_carry": false},
+        {"name": "Pantheon", "star_target": 2, "is_carry": false}
+      ],
+      "items": [
+        {"unit": "Blitzcrank", "item": "Bloodthirster", "priority": 1},
+        {"unit": "Blitzcrank", "item": "Ionic Spark", "priority": 2},
+        {"unit": "Blitzcrank", "item": "Morellonomicon", "priority": 3}
+      ]
+    },
+    {
+      "name": "Turbo Doomer",
+      "patch": "17.1b",
+      "tier": "S",
+      "avg_placement": 4.10,
+      "play_rate": 0.045,
+      "top4_rate": 0.57,
+      "win_rate": 0.15,
+      "target_level": 9,
+      "play_style": "fast9",
+      "notes": "Greedy fast 9 board with Blitzcrank AP carry; needs strong econ early or you die at 7.",
+      "units": [
+        {"name": "Bard", "star_target": 2, "is_carry": false},
+        {"name": "Blitzcrank", "star_target": 2, "is_carry": true},
+        {"name": "Vex", "star_target": 2, "is_carry": false},
+        {"name": "Rammus", "star_target": 2, "is_carry": false},
+        {"name": "Shen", "star_target": 2, "is_carry": false},
+        {"name": "Karma", "star_target": 2, "is_carry": false},
+        {"name": "Rhaast", "star_target": 2, "is_carry": false},
+        {"name": "Meepsie", "star_target": 2, "is_carry": false},
+        {"name": "Mordekaiser", "star_target": 2, "is_carry": false}
+      ],
+      "items": [
+        {"unit": "Blitzcrank", "item": "Rabadon's Deathcap", "priority": 1},
+        {"unit": "Blitzcrank", "item": "Jeweled Gauntlet", "priority": 2},
+        {"unit": "Blitzcrank", "item": "Hand of Justice", "priority": 3}
+      ]
+    },
+    {
+      "name": "Snipin & Vibin",
+      "patch": "17.1b",
+      "tier": "S",
+      "avg_placement": 4.15,
+      "play_rate": 0.07,
+      "top4_rate": 0.56,
+      "win_rate": 0.12,
+      "target_level": 8,
+      "play_style": "fast8",
+      "notes": "Jhin Sniper carry with Stargazer frontline; default comp when you hit Jhin and items.",
+      "units": [
+        {"name": "Jhin", "star_target": 2, "is_carry": true},
+        {"name": "Nunu", "star_target": 2, "is_carry": false},
+        {"name": "Xayah", "star_target": 2, "is_carry": false},
+        {"name": "Bard", "star_target": 2, "is_carry": false},
+        {"name": "Rammus", "star_target": 2, "is_carry": false},
+        {"name": "Rhaast", "star_target": 2, "is_carry": false},
+        {"name": "Gnar", "star_target": 2, "is_carry": false},
+        {"name": "Jax", "star_target": 2, "is_carry": false},
+        {"name": "Mordekaiser", "star_target": 2, "is_carry": false}
+      ],
+      "items": [
+        {"unit": "Jhin", "item": "Infinity Edge", "priority": 1},
+        {"unit": "Jhin", "item": "Giant Slayer", "priority": 2},
+        {"unit": "Jhin", "item": "Deathblade", "priority": 3}
+      ]
+    },
+    {
+      "name": "Cards & Cartridges",
+      "patch": "17.1b",
+      "tier": "S",
+      "avg_placement": 4.20,
+      "play_rate": 0.08,
+      "top4_rate": 0.55,
+      "win_rate": 0.11,
+      "target_level": 7,
+      "play_style": "reroll",
+      "notes": "Caitlyn 3-star reroll at 5 with Fateweaver TF backbone; easiest comp in the set.",
+      "units": [
+        {"name": "Jax", "star_target": 2, "is_carry": false},
+        {"name": "Caitlyn", "star_target": 3, "is_carry": true},
+        {"name": "Talon", "star_target": 3, "is_carry": false},
+        {"name": "Twisted Fate", "star_target": 3, "is_carry": false},
+        {"name": "Morgana", "star_target": 2, "is_carry": false},
+        {"name": "Corki", "star_target": 2, "is_carry": false},
+        {"name": "Riven", "star_target": 2, "is_carry": false},
+        {"name": "Milio", "star_target": 2, "is_carry": false},
+        {"name": "Aatrox", "star_target": 2, "is_carry": false}
+      ],
+      "items": [
+        {"unit": "Caitlyn", "item": "Deathblade", "priority": 1},
+        {"unit": "Caitlyn", "item": "Giant Slayer", "priority": 2},
+        {"unit": "Caitlyn", "item": "Guinsoo's Rageblade", "priority": 3}
+      ]
+    },
+    {
+      "name": "Crab Wave",
+      "patch": "17.1b",
+      "tier": "S",
+      "avg_placement": 4.25,
+      "play_rate": 0.05,
+      "top4_rate": 0.55,
+      "win_rate": 0.13,
+      "target_level": 7,
+      "play_style": "reroll",
+      "notes": "Aurora AP reroll at 7 with Mecha frontline; needs Voyager emblem to peak.",
+      "units": [
+        {"name": "Aurora", "star_target": 3, "is_carry": true},
+        {"name": "Maokai", "star_target": 2, "is_carry": false},
+        {"name": "Rhaast", "star_target": 2, "is_carry": false},
+        {"name": "Urgot", "star_target": 2, "is_carry": false},
+        {"name": "Karma", "star_target": 2, "is_carry": false},
+        {"name": "The Mighty Mech", "star_target": 2, "is_carry": false},
+        {"name": "Akali", "star_target": 2, "is_carry": false}
+      ],
+      "items": [
+        {"unit": "Aurora", "item": "Void Staff", "priority": 1},
+        {"unit": "Aurora", "item": "Rabadon's Deathcap", "priority": 2},
+        {"unit": "Aurora", "item": "Spear of Shojin", "priority": 3}
+      ]
+    },
+    {
+      "name": "Swarm-Storm",
+      "patch": "17.1b",
+      "tier": "S",
+      "avg_placement": 4.10,
+      "play_rate": 0.07,
+      "top4_rate": 0.59,
+      "win_rate": 0.14,
+      "target_level": 7,
+      "play_style": "reroll",
+      "notes": "Bel'Veth Primordian reroll; consistent top 4 floor, hard to win out without N.O.V.A. emblem.",
+      "units": [
+        {"name": "Bel'Veth", "star_target": 3, "is_carry": true},
+        {"name": "Caitlyn", "star_target": 2, "is_carry": false},
+        {"name": "Rek'Sai", "star_target": 3, "is_carry": false},
+        {"name": "Briar", "star_target": 3, "is_carry": false},
+        {"name": "Kindred", "star_target": 2, "is_carry": false},
+        {"name": "Maokai", "star_target": 2, "is_carry": false},
+        {"name": "Akali", "star_target": 2, "is_carry": false},
+        {"name": "Aatrox", "star_target": 2, "is_carry": false}
+      ],
+      "items": [
+        {"unit": "Bel'Veth", "item": "Quicksilver", "priority": 1},
+        {"unit": "Bel'Veth", "item": "Kraken's Fury", "priority": 2},
+        {"unit": "Bel'Veth", "item": "Giant Slayer", "priority": 3}
+      ]
+    },
+    {
+      "name": "Shepherd Viktor",
+      "patch": "17.1b",
+      "tier": "S",
+      "avg_placement": 4.11,
+      "play_rate": 0.056,
+      "top4_rate": 0.58,
+      "win_rate": 0.11,
+      "target_level": 7,
+      "play_style": "reroll",
+      "notes": "Viktor AP carry with Shepherd Illaoi/Rhaast frontline; flex around Psionic emblem if found.",
+      "units": [
+        {"name": "Viktor", "star_target": 3, "is_carry": true},
+        {"name": "Illaoi", "star_target": 2, "is_carry": false},
+        {"name": "Rhaast", "star_target": 2, "is_carry": false},
+        {"name": "Mordekaiser", "star_target": 2, "is_carry": false},
+        {"name": "Lissandra", "star_target": 3, "is_carry": false},
+        {"name": "Teemo", "star_target": 3, "is_carry": false},
+        {"name": "Sona", "star_target": 2, "is_carry": false}
+      ],
+      "items": [
+        {"unit": "Viktor", "item": "Void Staff", "priority": 1},
+        {"unit": "Viktor", "item": "Jeweled Gauntlet", "priority": 2},
+        {"unit": "Viktor", "item": "Giant Slayer", "priority": 3},
+        {"unit": "Illaoi", "item": "Gargoyle Stoneplate", "priority": 4}
+      ]
+    },
+    {
+      "name": "Stargazer Xayah Fast 9",
+      "patch": "17.1b",
+      "tier": "S",
+      "avg_placement": 4.20,
+      "play_rate": 0.05,
+      "top4_rate": 0.56,
+      "win_rate": 0.13,
+      "target_level": 9,
+      "play_style": "fast9",
+      "notes": "Default fast 9 with Xayah carry and Jhin secondary; needs Stargazer breakpoint to scale.",
+      "units": [
+        {"name": "Xayah", "star_target": 2, "is_carry": true},
+        {"name": "Jhin", "star_target": 2, "is_carry": false},
+        {"name": "Nunu", "star_target": 2, "is_carry": false},
+        {"name": "Lulu", "star_target": 2, "is_carry": false},
+        {"name": "Jax", "star_target": 2, "is_carry": false},
+        {"name": "Twisted Fate", "star_target": 2, "is_carry": false},
+        {"name": "Bard", "star_target": 2, "is_carry": false},
+        {"name": "Talon", "star_target": 2, "is_carry": false}
+      ],
+      "items": [
+        {"unit": "Xayah", "item": "Guinsoo's Rageblade", "priority": 1},
+        {"unit": "Xayah", "item": "Last Whisper", "priority": 2},
+        {"unit": "Xayah", "item": "Infinity Edge", "priority": 3}
+      ]
+    },
+    {
+      "name": "N.O.V.A. Bel'Veth & Akali",
+      "patch": "17.1b",
+      "tier": "A",
+      "avg_placement": 4.10,
+      "play_rate": 0.034,
+      "top4_rate": 0.598,
+      "win_rate": 0.0954,
+      "target_level": 8,
+      "play_style": "standard",
+      "notes": "Dual carry N.O.V.A. with Akali diving and Bel'Veth as anchor; needs both items to function.",
+      "units": [
+        {"name": "Bel'Veth", "star_target": 2, "is_carry": true},
+        {"name": "Akali", "star_target": 2, "is_carry": true},
+        {"name": "Rek'Sai", "star_target": 2, "is_carry": false},
+        {"name": "Briar", "star_target": 2, "is_carry": false},
+        {"name": "Aatrox", "star_target": 2, "is_carry": false},
+        {"name": "Caitlyn", "star_target": 2, "is_carry": false},
+        {"name": "Kindred", "star_target": 2, "is_carry": false},
+        {"name": "Maokai", "star_target": 2, "is_carry": false}
+      ],
+      "items": [
+        {"unit": "Bel'Veth", "item": "Deathblade", "priority": 1},
+        {"unit": "Bel'Veth", "item": "Quicksilver", "priority": 2},
+        {"unit": "Bel'Veth", "item": "Kraken's Fury", "priority": 3},
+        {"unit": "Akali", "item": "Hand of Justice", "priority": 4},
+        {"unit": "Akali", "item": "Edge of Night", "priority": 5},
+        {"unit": "Akali", "item": "Giant Slayer", "priority": 6}
+      ]
+    },
+    {
+      "name": "Vanguard Teemo",
+      "patch": "17.1b",
+      "tier": "A",
+      "avg_placement": 4.15,
+      "play_rate": 0.023,
+      "top4_rate": 0.578,
+      "win_rate": 0.0947,
+      "target_level": 7,
+      "play_style": "reroll",
+      "notes": "Teemo 3-star reroll with Vanguard tank wall; surprise carry, very item-greedy.",
+      "units": [
+        {"name": "Teemo", "star_target": 3, "is_carry": true},
+        {"name": "Leona", "star_target": 2, "is_carry": false},
+        {"name": "Nasus", "star_target": 3, "is_carry": false},
+        {"name": "Lissandra", "star_target": 3, "is_carry": false},
+        {"name": "Mordekaiser", "star_target": 2, "is_carry": false},
+        {"name": "Nunu", "star_target": 2, "is_carry": false},
+        {"name": "Sona", "star_target": 2, "is_carry": false}
+      ],
+      "items": [
+        {"unit": "Teemo", "item": "Guinsoo's Rageblade", "priority": 1},
+        {"unit": "Teemo", "item": "Giant Slayer", "priority": 2},
+        {"unit": "Teemo", "item": "Hextech Gunblade", "priority": 3},
+        {"unit": "Leona", "item": "Gargoyle Stoneplate", "priority": 4}
+      ]
+    },
+    {
+      "name": "Fateweaver TF Reroll",
+      "patch": "17.1b",
+      "tier": "A",
+      "avg_placement": 4.23,
+      "play_rate": 0.035,
+      "top4_rate": 0.561,
+      "win_rate": 0.0927,
+      "target_level": 7,
+      "play_style": "reroll",
+      "notes": "Twisted Fate AP reroll with Fateweaver Jax frontline; struggles vs Mecha tank walls.",
+      "units": [
+        {"name": "Twisted Fate", "star_target": 3, "is_carry": true},
+        {"name": "Jax", "star_target": 3, "is_carry": false},
+        {"name": "Caitlyn", "star_target": 3, "is_carry": false},
+        {"name": "Aatrox", "star_target": 3, "is_carry": false},
+        {"name": "Milio", "star_target": 2, "is_carry": false},
+        {"name": "Corki", "star_target": 2, "is_carry": false},
+        {"name": "Lulu", "star_target": 2, "is_carry": false}
+      ],
+      "items": [
+        {"unit": "Twisted Fate", "item": "Nashor's Tooth", "priority": 1},
+        {"unit": "Twisted Fate", "item": "Hextech Gunblade", "priority": 2},
+        {"unit": "Twisted Fate", "item": "Spear of Shojin", "priority": 3},
+        {"unit": "Jax", "item": "Gargoyle Stoneplate", "priority": 4}
+      ]
+    },
+    {
+      "name": "Rogue Reroll Kai'Sa",
+      "patch": "17.1b",
+      "tier": "A",
+      "avg_placement": 4.30,
+      "play_rate": 0.04,
+      "top4_rate": 0.54,
+      "win_rate": 0.12,
+      "target_level": 7,
+      "play_style": "reroll",
+      "notes": "Kai'Sa 3-star with Rogue crit synergy; volatile, snowballs hard with Rogue emblem.",
+      "units": [
+        {"name": "Kai'Sa", "star_target": 3, "is_carry": true},
+        {"name": "Talon", "star_target": 3, "is_carry": false},
+        {"name": "Gwen", "star_target": 2, "is_carry": false},
+        {"name": "Briar", "star_target": 3, "is_carry": false},
+        {"name": "Riven", "star_target": 2, "is_carry": false},
+        {"name": "Fizz", "star_target": 2, "is_carry": false},
+        {"name": "Aatrox", "star_target": 2, "is_carry": false}
+      ],
+      "items": [
+        {"unit": "Kai'Sa", "item": "Guinsoo's Rageblade", "priority": 1},
+        {"unit": "Kai'Sa", "item": "Infinity Edge", "priority": 2},
+        {"unit": "Kai'Sa", "item": "Last Whisper", "priority": 3}
+      ]
+    }
+  ]
+}
